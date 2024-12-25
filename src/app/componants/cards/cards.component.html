@@ -1,0 +1,29 @@
+<section class="places spad">
+  <div class="container">
+    <div class="places__grid">
+      <div *ngFor="let place of places" class="places__item">
+        <div class="places__item__pic responsive-media">
+          <!-- Check if the media is a video or an image -->
+          <img  [src]="place.media.url" [alt]="place.name" />
+        </div>
+        <div class="places__item__text">
+          <h4 class="my-3">
+            {{ place.title }}
+          </h4>
+          <p>
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            {{ place.city }}, Egypt
+          </p>
+          <div class="View">
+            <div class="price">
+              ${{ place.viewPrice }}
+            </div>
+            <button class="places__view-btn" (click)="goToDetails(place._id)">
+              <i class="fas fa-eye"></i> View
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
