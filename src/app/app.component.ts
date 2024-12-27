@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.isBrowserCapable = this.browserCapabilitiesService['checkCapabilities']();
+    this.isBrowserCapable = this.browserCapabilitiesService.checkCapabilities();
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {

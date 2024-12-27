@@ -5,7 +5,6 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   providedIn: 'root',
 })
 export class BrowserCapabilitiesService {
-  [x: string]: any;
   constructor(private deviceService: DeviceDetectorService) {}
 
   getBrowserInfo() {
@@ -22,4 +21,10 @@ export class BrowserCapabilitiesService {
   isFeatureSupported(feature: string): boolean {
     return feature in window;
   }
+
+  checkCapabilities(): boolean {
+    const browserInfo = this.getBrowserInfo();
+    return browserInfo.isDesktop;
+  }
 }
+
