@@ -12,7 +12,9 @@ export class AuthService {
   private apiUrl = `${environment.apiUrl}`;
 
   private currentUserSubject = new BehaviorSubject<any>(
-    JSON.parse(localStorage.getItem('currentUser') || '{}')
+    localStorage.getItem('currentUser')
+      ? JSON.parse(localStorage.getItem('currentUser')!)
+      : null
   );
   public currentUser = this.currentUserSubject.asObservable();
 
@@ -56,5 +58,10 @@ export class AuthService {
 
   get currentUserValue(): any {
     return this.currentUserSubject.value;
+  }
+
+  isLoggedIn(): boolean {
+    const currentUser = this.currentUserSubject.value;
+    return currentUser && currentUser.token ? true : false;
   }
 }

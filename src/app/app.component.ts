@@ -7,6 +7,7 @@ import { FooterComponent } from './componants/footer/footer.component';
 import { FooteritemComponent } from './componants/footeritem/footeritem.component';
 import { UpbuttonComponent } from './componants/upbutton/upbutton.component';
 import { LoadingScreenComponent } from './shared/loading-screen/loading-screen.component';
+import { BrowserCapabilitiesService } from './All_services/browser_services/browser-capabilities.service';
 
 @Component({
   selector: 'app-root',
@@ -23,15 +24,23 @@ export class AppComponent implements OnInit {
   title = 'Yaro';
   isLoading = false;
   hideLayout = false;
+  isBrowserCapable = false;
 
-  constructor(private router: Router, private loadingService: LoadingService) {}
+  constructor(
+    private router: Router,
+    private loadingService: LoadingService,
+    private browserCapabilitiesService: BrowserCapabilitiesService
+  ) {}
 
   ngOnInit() {
+    this.isBrowserCapable = this.browserCapabilitiesService['checkCapabilities']();
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         const url = event.url;
 
         this.hideLayout = url.includes('/login') || url.includes('/signup');
+
         this.loadingService.showLoading();
       } else if (event instanceof NavigationEnd) {
         this.loadingService.hideLoading();
