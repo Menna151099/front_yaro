@@ -4,11 +4,11 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators, AbstractContro
 import { AuthService } from '../../All_services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,RouterModule],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })

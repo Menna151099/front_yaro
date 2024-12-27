@@ -64,7 +64,7 @@
       <button type="submit" class="btn-submit" [disabled]="signUpForm.invalid">Sign Up</button>
 
       <div class="forgot-password">
-        <a href="#">Already have an account? Login</a>
+        <a [routerLink]="['/login']" routerLinkActive="router-link-active">Already have an account? Login</a>
       </div>
     </form>
   </div>

@@ -3,14 +3,11 @@
   <div class="row">
     <div class="col-lg-2">
       <div class="placesDetails__rating__left">
-        <!-- Display the calculated average rating -->
-        <h2>{{ averageRating | number: '1.1-1' }}</h2> <!-- Display average with 1 decimal place -->
+        <h2>{{ averageRating | number: '1.1-1' }}</h2>
         <div class="rating">
           <i *ngFor="let star of [].constructor(averageRating); let i = index" class="fa fa-star" aria-hidden="true"></i>
-          <!-- Fill stars based on the average rating -->
           <i *ngFor="let star of [].constructor(5 - averageRating); let i = index" class="fa fa-star-o" aria-hidden="true"></i>
         </div>
-        <!-- Display the total number of reviews -->
         <p>({{ totalReviews }} Ratings)</p>
       </div>
     </div>
@@ -19,18 +16,16 @@
 
 <div class="comment-section">
   <h4>Comments</h4>
-  <p></p>
   <div *ngFor="let review of reviews" class="comment-item">
     <div class="comment-text">
       <span>{{ review.createdAt | date: 'mediumDate' }}</span>
       <div class="content">
-        <h5 class="m-0">{{ review.user.firstName }} {{ review.user.lastName }}</h5>
+        <h5 class="m-0">{{ getUserData(review.userId).firstName }} {{ getUserData(review.userId).lastName }}</h5>
         <div class="rating mt-0 px-2">
           <i *ngFor="let star of [].constructor(review.rating); let i = index" class="fa fa-star" aria-hidden="true"></i>
         </div>
       </div>
       <p>{{ review.comment }}</p>
-
       <div class="media-section">
         <div class="media-gallery">
           <div *ngFor="let media of review.media" class="media-item">
@@ -45,7 +40,7 @@
     </div>
   </div>
 
-  <div class="review-section">
+  <div class="review-section" *ngIf="isLoggedIn">
     <h4>Add Review</h4>
     <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
       <div>
@@ -68,7 +63,11 @@
         <input type="file" (change)="onFileSelect($event)" multiple>
       </div>
 
-      <button type="submit" class="submit-btn" [disabled]="reviewForm.invalid">Submit Now</button>
+      <button type="submit" class="submit-btn">Submit Now</button>
     </form>
+  </div>
+
+  <div *ngIf="!isLoggedIn" class="login-message">
+    <p>You need to <a [routerLink]="['/login']">log in</a> to add a review.</p>
   </div>
 </div>

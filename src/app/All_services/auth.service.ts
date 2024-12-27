@@ -9,14 +9,14 @@ import { environment } from './../../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = `${ environment.apiUrl}`;
+  private apiUrl = `${environment.apiUrl}`;
 
   private currentUserSubject = new BehaviorSubject<any>(
     JSON.parse(localStorage.getItem('currentUser') || '{}')
   );
   public currentUser = this.currentUserSubject.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
   getToken(): string | null {
     return localStorage.getItem('authToken');
@@ -58,4 +58,3 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 }
-

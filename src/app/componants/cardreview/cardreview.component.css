@@ -385,3 +385,26 @@ li {
     padding: 10px 25px;
   }
 }
+
+.login-message {
+  background-color: #ffc73b;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #323232;
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  margin: 10px auto;
+}
+
+.login-message a {
+  color: #4657f0;
+  text-decoration: underline;
+}
+
+.login-message a:hover {
+  color: #1d2a3b;
+}
